@@ -3,7 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace Library.Controllers
 {
-    public class BookController : Controller
+    public class BookController : BaseController
     {
         private readonly IBookService bookService;
 
@@ -18,5 +18,45 @@ namespace Library.Controllers
 
             return View(model);
         }
+
+        public async Task<IActionResult> Mine()
+        {
+            var model = await bookService.GetMyBooksAsync(GetUserId());
+            return View(model);
+
+        }
+
+        public async Task<IActionResult> AddToCollection(int id)
+        {
+            var book = await bookService.GetBookByIdAsync(id);
+
+            if (book == null)
+            {
+                return RedirectToAction(nameof(All));
+            }
+
+            var userId = GetUserId();
+
+            await bookService.AddBookToCollectionAsync(userId, book);
+
+            return RedirectToAction(nameof(All));
+        }
+
+        public async Task<IActionResult> RemoveFromCollection(int id)
+        {
+            var book = await bookService.GetBookByIdAsync(id);
+
+            if (book == null)
+            {
+                return RedirectToAction(nameof(Mine));
+            }
+
+            var userId = GetUserId();
+
+            await bookService.RemoveBookFromCollectionAsync(userId, book);
+
+            return RedirectToAction(nameof(Mine));
+        }
+
     }
 }
