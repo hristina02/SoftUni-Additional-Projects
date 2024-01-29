@@ -15,6 +15,22 @@ namespace Library.Services
             this.dbContext = dbContext;
         }
 
+        public async Task AddBookAsync(AddBookViewModel model)
+        {
+            Book book = new Book
+            {
+                Title = model.Title,
+                Author = model.Author,
+                ImageUrl = model.Url,
+                Description = model.Description,
+                CategoryId = model.CategoryId,
+                Rating = decimal.Parse(model.Rating)
+            };
+
+            await dbContext.Books.AddAsync(book);
+            await dbContext.SaveChangesAsync();
+        }
+
         public async Task AddBookToCollectionAsync(string userId, BookViewModel book)
         {
             bool alreadyAdded = await dbContext.IdentityUsersBooks
@@ -33,6 +49,10 @@ namespace Library.Services
             }
         }
 
+        public Task EditBookAsync(AddBookViewModel model, int id)
+        {
+            throw new NotImplementedException();
+        }
 
         public async Task<IEnumerable<AllBookViewModel>> GetAllBooksAsync()
         {
@@ -66,6 +86,29 @@ namespace Library.Services
 
         }
 
+        public async Task<AddBookViewModel?> GetBookByIdForEditAsync(int id)
+        {
+            var categories = await dbContext.Categories
+              .Select(c => new CategoryViewModel
+              {
+                  Id = c.Id,
+                  Name = c.Name
+              }).ToListAsync();
+
+            return await dbContext.Books
+                .Where(b => b.Id == id)
+                .Select(b => new AddBookViewModel
+                {
+                    Title = b.Title,
+                    Author = b.Author,
+                    Url = b.ImageUrl,
+                    Description = b.Description,
+                    Rating = b.Rating.ToString(),
+                    CategoryId = b.CategoryId,
+                    Categories = categories
+                }).FirstOrDefaultAsync();
+        }
+
         public async Task<IEnumerable<AllBookViewModel>> GetMyBooksAsync(string userId)
         {
             return await dbContext.IdentityUsersBooks
@@ -79,6 +122,23 @@ namespace Library.Services
                     Description = b.Book.Description,
                     Category = b.Book.Category.Name
                 }).ToListAsync();
+        }
+
+        public async Task <AddBookViewModel> GetNewAddBookModelAsync()
+        {
+            var categories = await dbContext.Categories
+                .Select(c => new CategoryViewModel
+                {
+                    Id = c.Id,
+                    Name = c.Name
+                }).ToListAsync();
+
+            var model = new AddBookViewModel
+            {
+                Categories = categories
+            };
+
+            return model;
         }
 
         public async Task RemoveBookFromCollectionAsync(string userId, BookViewModel book)
