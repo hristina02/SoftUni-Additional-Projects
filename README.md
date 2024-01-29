@@ -1,2 +1,2 @@
 # SoftUni-Additional-Projects
-Simple projects
+MVC projects and exercise with Entity Framework
