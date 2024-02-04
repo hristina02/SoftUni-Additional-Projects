@@ -1,4 +1,4 @@
-﻿// ReSharper disable VirtualMemberCallInConstructor
+﻿
 namespace HouseRentingSystem.Data.Models
 {
     using Microsoft.AspNetCore.Identity;
@@ -22,7 +22,7 @@ namespace HouseRentingSystem.Data.Models
 
         [Required]
         [MaxLength(FirstNameMaxLength)]
-        public string FirstName { get; set; } = null!;
+        public string FirstName { get; set; }=null!;
 
         [Required]
         [MaxLength(LastNameMaxLength)]

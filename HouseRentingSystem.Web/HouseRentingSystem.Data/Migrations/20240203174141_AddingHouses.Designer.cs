@@ -4,6 +4,7 @@ using HouseRentingSystem.Web.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,10 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace HouseRentingSystem.Data.Migrations
 {
     [DbContext(typeof(HouseRentingDbContext))]
-    partial class HouseRentingDbContextModelSnapshot : ModelSnapshot
+    [Migration("20240203174141_AddingHouses")]
+    partial class AddingHouses
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -172,9 +174,7 @@ namespace HouseRentingSystem.Data.Migrations
                         .HasColumnType("int");
 
                     b.Property<DateTime>("CreatedOn")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("datetime2")
-                        .HasDefaultValue(new DateTime(2024, 2, 4, 8, 5, 15, 872, DateTimeKind.Utc).AddTicks(4938));
+                        .HasColumnType("datetime2");
 
                     b.Property<string>("Description")
                         .IsRequired()
@@ -213,7 +213,7 @@ namespace HouseRentingSystem.Data.Migrations
                     b.HasData(
                         new
                         {
-                            Id = new Guid("668d1d02-03db-4777-844d-7fd386ef3fa7"),
+                            Id = new Guid("e67254c6-a96a-4565-a6fb-006a0a8d2b92"),
                             Address = "North London, UK (near the border)",
                             AgentId = new Guid("48245cda-4a0f-4bc6-90ce-7f8c5493c91b"),
                             CategoryId = 3,
@@ -227,7 +227,7 @@ namespace HouseRentingSystem.Data.Migrations
                         },
                         new
                         {
-                            Id = new Guid("8fe99b61-f1ef-45b5-a814-5490f218e606"),
+                            Id = new Guid("cad6e439-b3a2-44cf-837f-874f8c8698db"),
                             Address = "Near the Sea Garden in Burgas, Bulgaria",
                             AgentId = new Guid("48245cda-4a0f-4bc6-90ce-7f8c5493c91b"),
                             CategoryId = 2,
@@ -240,7 +240,7 @@ namespace HouseRentingSystem.Data.Migrations
                         },
                         new
                         {
-                            Id = new Guid("c3303cdd-ee4a-4023-8fa9-fe1d76f03223"),
+                            Id = new Guid("cdbf3d45-2180-442d-8937-d9d4ec81004c"),
                             Address = "Boyana Neighbourhood, Sofia, Bulgaria",
                             AgentId = new Guid("48245cda-4a0f-4bc6-90ce-7f8c5493c91b"),
                             CategoryId = 2,

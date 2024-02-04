@@ -7,12 +7,7 @@ namespace HouseRentingSystem.Web.Controllers
 {
     public class HomeController : Controller
     {
-    
-
-        public HomeController(ILogger<HomeController> logger)
-        {
-          
-        }
+        private readonly IHouseService houseService;
 
         public IActionResult Index()
         {
