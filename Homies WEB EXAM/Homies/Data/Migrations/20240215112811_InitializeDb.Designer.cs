@@ -4,6 +4,7 @@ using Homies.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,10 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Homies.Data.Migrations
 {
     [DbContext(typeof(HomiesDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20240215112811_InitializeDb")]
+    partial class InitializeDb
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -344,7 +346,7 @@ namespace Homies.Data.Migrations
             modelBuilder.Entity("Homies.Data.Models.EventParticipant", b =>
                 {
                     b.HasOne("Homies.Data.Models.Event", "Event")
-                        .WithMany("EventsParticipants")
+                        .WithMany("EvenstParticipants")
                         .HasForeignKey("EventId")
                         .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
@@ -413,7 +415,7 @@ namespace Homies.Data.Migrations
 
             modelBuilder.Entity("Homies.Data.Models.Event", b =>
                 {
-                    b.Navigation("EventsParticipants");
+                    b.Navigation("EvenstParticipants");
                 });
 
             modelBuilder.Entity("Homies.Data.Models.Type", b =>
