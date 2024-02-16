@@ -282,7 +282,7 @@ namespace Homies.Controllers
         }
 
         
-        [HttpPost]
+        [HttpGet]
         public async Task<IActionResult> Delete(int id)
         {
             //Finding the Event and it's Participants
