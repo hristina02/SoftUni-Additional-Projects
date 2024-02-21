@@ -9,6 +9,7 @@
     using ViewModels.House;
 
     using static Common.NotificationMessagesConstants;
+    using HouseRentingSystem.Services.Data.Models.House;
 
     [Authorize]
     public class HouseController : Controller
@@ -25,19 +26,19 @@
             this.houseService = houseService;
         }
 
-        //[HttpGet]
-        //[AllowAnonymous]
-        //public async Task<IActionResult> All([FromQuery] AllHousesQueryModel queryModel)
-        //{
-        //    AllHousesFilteredAndPagedServiceModel serviceModel =
-        //        await this.houseService.AllAsync(queryModel);
+        [HttpGet]
+        [AllowAnonymous]
+        public async Task<IActionResult> All([FromQuery] AllHousesQueryModel queryModel)
+        {
+            AllHousesFilteredAndPagedServiceModel serviceModel =
+                await this.houseService.AllAsync(queryModel);
 
-        //    queryModel.Houses = serviceModel.Houses;
-        //    queryModel.TotalHouses = serviceModel.TotalHousesCount;
-        //    queryModel.Categories = await this.categoryService.AllCategoryNamesAsync();
+            queryModel.Houses = serviceModel.Houses;
+            queryModel.TotalHouses = serviceModel.TotalHousesCount;
+            queryModel.Categories = await this.categoryService.AllCategoryNamesAsync();
 
-        //    return this.View(queryModel);
-        //}
+            return this.View(queryModel);
+        }
 
         [HttpGet]
         public async Task<IActionResult> Add()
