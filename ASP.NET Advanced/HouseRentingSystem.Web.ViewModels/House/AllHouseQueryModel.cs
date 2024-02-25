@@ -1,11 +1,9 @@
-﻿using System;
-
-namespace HouseRentingSystem.Services.Data.Interfaces
+﻿namespace HouseRentingSystem.Web.ViewModels.House
 {
     using System.ComponentModel.DataAnnotations;
-    //using Enums;
-    using HouseRentingSystem.Web.ViewModels.House;
-    using HouseRentingSystem.Web.ViewModels.House.Enums;
+
+    using Enums;
+
     using static Common.GeneralApplicationConstants;
 
     public class AllHousesQueryModel
